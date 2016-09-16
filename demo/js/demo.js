@@ -36,8 +36,35 @@ var data = [{
             marker: marker
         }];
 var plotOptions = {
-            area: {
-                pointStart: 1940
+            // area: {
+            //     pointStart: 1940
+            // },
+            title: {
+              margin: 50,
+              style: {
+                color: '#6c6c6c',
+                fontFamily: 'Roboto',
+                textTransform: 'uppercase'
+              },
+              text: 'Evolución del ánimo'
+            },
+            tooltip: {
+                enabled: false,
+                pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+            },
+            xAxis: {
+              opposite: true,
+              gridLineColor: '#c6c8cf',
+              gridLineWidth: 1,
+              labels: {
+                color: 'red',
+                fontFamily: 'Roboto'
+              },
+              lineWidth: 0,
+
+            },
+            yAxis: {
+              visible: false
             }
         };
 // The dom-change event signifies when the template has stamped its DOM.
