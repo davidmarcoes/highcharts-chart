@@ -3,18 +3,44 @@
 <dom-module id="highcharts-chart">
     <template>
         <style>
-            :host {width: 100%;display: inline-block;min-height: var(--highcharts-min-height, 26em)}
-            #Chart {@apply(--highcharts-container);}
+            :host {
+              width: 100%;display: inline-block;
+              /*min-height: var(--highcharts-min-height, 26em)*/
+            }
+            #Chart {
+              @apply(--highcharts-container);
+            }
         </style>
         <div id="Chart" width="100%" on-click="_checkSelected"></div>
     </template>
     <script>
-        'use strict';
-        Polymer({
-            is: "highcharts-chart",
-            behaviors: [Highcharts.Polymer_BaseBehavior, Highcharts.Polymer_ChartBehavior],
-            properties: {type: {type: String, value: 'spline', observer: '_updateType'}},
-            ready: function() {this.__createChart()},
-        });
+    'use strict';
+    Polymer({
+      is: 'highcharts-chart',
+      behaviors: [
+        Highcharts.Polymer_BaseBehavior,
+        Highcharts.Polymer_ChartBehavior
+      ],
+      properties: {
+          type: {
+              type: String,
+              value: 'spline',
+              observer: '_updateType'
+          }
+      },
+      ready: function() {
+        this.__createChart();
+        // if (this.chartOptions && this.data.length > 0) {
+        // Polymer.RenderStatus.afterNextRender(this, function() {
+        //   this.resizeChart();
+        // });
+        // }
+        // this.__createChart();
+      },
+      updateChart: function(payload) {
+        console.log(payload);
+        this.addData(payload.time, payload.mood, payload.index);
+      }
+    });
     </script>
 </dom-module>

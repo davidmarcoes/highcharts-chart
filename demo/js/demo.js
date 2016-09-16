@@ -49,8 +49,7 @@ var plotOptions = {
               text: 'Evolución del ánimo'
             },
             tooltip: {
-                enabled: false,
-                pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+                enabled: false
             },
             xAxis: {
               opposite: true,
@@ -60,8 +59,7 @@ var plotOptions = {
                 color: 'red',
                 fontFamily: 'Roboto'
               },
-              lineWidth: 0,
-
+              lineWidth: 0
             },
             yAxis: {
               visible: false
