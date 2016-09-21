@@ -4,13 +4,27 @@
     <template>
         <style>
             :host {
-              width: 100%;display: inline-block;
+              width: 100%;
+              display: inline-block;
+              bottom: 0;
+              position: absolute;
+              transform: scaleX(1.02);
               /*min-height: var(--highcharts-min-height, 26em)*/
             }
             #Chart {
               @apply(--highcharts-container);
             }
+            .title {
+              color: #6c6c6c;
+              font-family: 'Roboto';
+              font-size: 12px;
+              text-transform: uppercase;
+              text-align: center;
+              padding: 0;
+              margin: 3rem 0 2rem 0;
+            }
         </style>
+        <p class="title">{{externalTitle}}</p>
         <div id="Chart" width="100%" on-click="_checkSelected"></div>
     </template>
     <script>
@@ -26,16 +40,56 @@
               type: String,
               value: 'spline',
               observer: '_updateType'
+          },
+          chart: {
+            type: Object,
+            value: {
+              style: {
+                padding: '0',
+                margin: '0',
+                height: '35vh'
+              },
+              margin: [0,0,0,0],
+              spacing: [0,0,0,0]
+            }
+          },
+          tooltipOptions: {
+            type: Object,
+            value: {
+              enabled: false
+            }
+          },
+          yAxis: {
+            type: Object,
+            value: {
+              visible: false
+            }
+          },
+          xAxis: {
+            type: Object,
+            value: {
+              opposite: true,
+              gridLineColor: "#c6c8cf",
+              gridLineWidth: 1,
+              labels: {
+                fontFamily: 'Roboto',
+                enabled: true,
+                format: '{value}'
+              },
+              lineWidth: 0,
+              tickInterval: 10
+            }
+          },
+          title: {
+            type: Object,
+            value: {
+              text: ''
+            }
           }
       },
       ready: function() {
         this.__createChart();
-        // if (this.chartOptions && this.data.length > 0) {
-        // Polymer.RenderStatus.afterNextRender(this, function() {
-        //   this.resizeChart();
-        // });
-        // }
-        // this.__createChart();
+        this.async(this.resizeChart, 500);
       },
       updateChart: function(payload) {
         console.log(payload);
