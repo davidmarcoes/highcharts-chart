@@ -32,18 +32,32 @@
       properties: {
           type: {
               type: String,
-              value: 'spline',
+              value: 'area',
               observer: '_updateType'
+          },
+          data: {
+            type: Array,
+            value: [{
+                data: [],
+                color: '#224fbd',
+                fillOpacity: 0.9,
+                marker: { enabled: false },
+                pointInterval: 300 * 1000
+              },
+              {
+                data: [],
+                color: "#e83f6c",
+                fillOpacity: 1,
+                marker: { enabled: false },
+                pointInterval: 300 * 1000
+              }]
           },
           chart: {
             type: Object,
             value: {
               style: {
-                padding: '0',
-                margin: '0',
-                height: '35vh'
+                height: '30vh'
               },
-              margin: [0,0,0,0],
               spacing: [0,0,0,0]
             }
           },
@@ -62,16 +76,21 @@
           xAxis: {
             type: Object,
             value: {
+              type: 'datetime',
               opposite: true,
               gridLineColor: "#c6c8cf",
               gridLineWidth: 1,
+              lineWidth: 0,
               labels: {
+                align: 'left',
                 fontFamily: 'Roboto',
                 enabled: true,
-                format: '{value}'
-              },
-              lineWidth: 0,
-              tickInterval: 10
+                maxStaggerLines: 7,
+                overflow: true,
+                reserveSpace: false,
+                x: 15,
+                y: 0
+              }
             }
           },
           title: {
@@ -86,8 +105,13 @@
         this.async(this.resizeChart, 500);
       },
       updateChart: function(payload) {
-        console.log(payload);
         this.addData(payload.time, payload.mood, payload.index);
+      },
+      resetChart: function() {
+        var series = this.data;
+        for (var i = 0; i < series.length; i++) {
+          this.updateSeries('data', [ [0,0] ], i);
+        }
       }
     });
     </script>
