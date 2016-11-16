@@ -107,6 +107,9 @@
       updateChart: function(payload) {
         this.addData(payload.time, payload.mood, payload.index);
       },
+      updateLast: function(payload) {
+        this.updateLastData(payload.time, payload.mood, payload.index);
+      },
       resetChart: function() {
         var series = this.data;
         for (var i = 0; i < series.length; i++) {

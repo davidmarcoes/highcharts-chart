@@ -333,6 +333,10 @@ pushData: function(x, y, z, append, drillable) {
         drilldown: true
     } : [x, y], true, !append)
 },
+updateLastData: function(x, y, z) {
+    var last = this._getSeries(z).data.slice(-1)[0];
+    last.update(y);
+},
 addSeries: function(name, data, colorByPoint, otherOptions) {
     this._chart.addSeries($.extend({
         name: name,
