@@ -337,6 +337,9 @@ updateLastData: function(x, y, z) {
     var last = this._getSeries(z).data.slice(-1)[0];
     last.update(y);
 },
+updateAllData: function(data, z) {
+    this._getSeries(z).setData(data);
+},
 addSeries: function(name, data, colorByPoint, otherOptions) {
     this._chart.addSeries($.extend({
         name: name,

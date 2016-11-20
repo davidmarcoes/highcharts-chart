@@ -110,6 +110,9 @@
       updateLast: function(payload) {
         this.updateLastData(payload.time, payload.mood, payload.index);
       },
+      updateAll: function(payload) {
+        this.updateAllData(payload.data, payload.mood);
+      },
       resetChart: function() {
         var series = this.data;
         for (var i = 0; i < series.length; i++) {
